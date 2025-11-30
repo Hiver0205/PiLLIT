@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:fitsSystemWindows="true"
+    android:background="#FFFFFF">
+
+    <!-- 🔵 상단 영역 확보 (상태바와 겹침 방지) -->
+    <View
+        android:id="@+id/statusSpacer"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true" />
+
+
+
+
+    <!-- 🔵 완료 버튼 (오른쪽 상단) -->
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택 완료"
+        android:textColor="#1E2A5E"
+        android:textStyle="bold"
+        android:backgroundTint="#FFC94A"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/statusSpacer"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" />
+
+    <!-- 🔵 메인 컨텐츠: 검색창 + 리스트 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btnDone"
+        android:layout_marginTop="10dp">
+
+        <!-- 🔎 검색창 -->
+        <EditText
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="성분 검색"
+            android:padding="12dp"
+            android:background="#EEEEEE"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:drawablePadding="10dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:textColorHint="#888888" />
+
+        <!-- 리스트 -->
+        <ListView
+            android:id="@+id/ingredientList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="5dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

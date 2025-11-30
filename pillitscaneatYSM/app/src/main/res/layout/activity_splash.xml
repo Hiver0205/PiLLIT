@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
+    <!-- 🔵 TOP BAR 삽입 -->
+    <View
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/top_bar" />
+
+    <!-- 중앙 묶음 -->
+    <LinearLayout
+        android:id="@+id/centerGroup"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <!-- ScanEat 텍스트 -->
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#1E2A5E"
+            android:layout_marginBottom="20dp" />
+
+        <!-- 로고 이미지 -->
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="220dp"
+            android:layout_height="300dp"
+            android:src="@drawable/scaneat_logo"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:layout_marginBottom="20dp" />
+
+        <!-- 회사명 -->
+        <TextView
+            android:id="@+id/companyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PillIT"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#1E2A5E" />
+    </LinearLayout>
+
+    <!-- 하단 디자인 바 -->
+    <View
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@drawable/bottom_bar"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

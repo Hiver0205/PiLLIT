@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
+
+
+
+
+    <!-- 🔵 CameraX 프리뷰 -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/cameraPreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/camera_preview_desc"
+        app:implementationMode="performance"
+        android:adjustViewBounds="true" />
+
+    <!-- 🔵 촬영 버튼 -->
+    <ImageButton
+        android:id="@+id/btnTakePicture"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginBottom="35dp"
+        android:contentDescription="@string/take_picture"
+        app:tint="@color/black"
+        app:srcCompat="@drawable/ic_camera" />
+
+
+
+</RelativeLayout>

@@ -1,0 +1,66 @@
+<resources>
+    <!-- 앱 이름 -->
+    <string name="app_name">ScanEat</string>
+
+    <!-- 공통 -->
+    <string name="back">Back</string>
+
+    <!-- 로그인 화면 -->
+    <string name="id_label1">Name</string>
+    <string name="id_label">Email</string>
+    <string name="hint_email">이메일을 입력하세요</string>
+    <string name="password_label">Password</string>
+    <string name="hint_password">대문자, 소문자, 특수문자를 포함하세요</string>
+    <string name="login_button">로그인</string>
+
+    <!-- 회원가입 화면 -->
+    <string name="signup_button">회원가입</string>
+
+    <!-- 알레르기 입력 화면 -->
+    <string name="enter_allergy_info">알레르기 정보를 입력하세요</string>
+    <string name="search">검색</string>
+
+    <!-- 하단 네비게이션 바 -->
+    <string name="nav_scan">스캔</string>
+    <string name="nav_allergy">알레르기</string>
+    <string name="nav_settings">설정</string>
+
+    <!-- ⭐ fragment_home.xml 에 필요한 문자열 추가 -->
+    <string name="home_title">ScanEat 메인 화면</string>
+    <string name="scan">OCR 스캔</string>
+    <string name="allergy">알레르기 설정</string>
+    <string name="myinfo">내 정보</string>
+
+    <string name="userinfo_title">내 정보</string>
+    <string name="userinfo_name">이름:</string>
+    <string name="userinfo_email">이메일:</string>
+    <string name="userinfo_allergy">알레르기:</string>
+    <string name="userinfo_edit_allergy">알레르기 정보 수정</string>
+    <string name="userinfo_change_pw">비밀번호 변경</string>
+
+    <string name="camera_preview_desc">카메라 미리보기 화면</string>
+    <string name="take_picture">사진 촬영</string>
+
+    <string name="menu_home">홈</string>
+    <string name="menu_scan">스캔</string>
+    <string name="menu_allergy">알레르기</string>
+    <string name="menu_userinfo">내정보</string>
+    <string name="menu_logout">로그아웃</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="profile_icon">profile icon</string>
+    <string name="user_welcome">사용자님 안녕하세요!</string>
+    <string name="user_email_placeholder">email@example.com</string>
+
+    <string name="header_welcome">사용자님 안녕하세요!</string>
+    <string name="header_email">email@example.com</string>
+
+    <string name="num_1">1</string>
+    <string name="label_drug_name">약물명</string>
+    <string name="label_mild_symptom">경증 증상</string>
+    <string name="label_severe_symptom">중증 증상</string>
+
+
+</resources>

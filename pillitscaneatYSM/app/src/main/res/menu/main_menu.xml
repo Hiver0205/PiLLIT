@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menu_home" android:title="@string/menu_home" />
+    <item android:id="@+id/menu_scan" android:title="@string/menu_scan" />
+    <item android:id="@+id/menu_allergy" android:title="@string/menu_allergy" />
+    <item android:id="@+id/menu_userinfo" android:title="@string/menu_userinfo" />
+
+    <item
+        android:id="@+id/menu_logout"
+        android:title="@string/menu_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        app:showAsAction="never" />
+</menu>

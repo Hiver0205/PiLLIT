@@ -1,0 +1,116 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <!-- 선택 완료 버튼 -->
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택 완료"
+        android:padding="10dp"
+        android:backgroundTint="#FFC94A"
+        android:textColor="#1E2A5E"
+        android:layout_gravity="end"
+        android:layout_marginBottom="15dp"/>
+
+    <!-- OCR 성분명 -->
+    <TextView
+        android:id="@+id/textOcrIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="인식한 약 성분명 : "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- 검색창 -->
+    <EditText
+        android:id="@+id/editSearch"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="제품명 검색"
+        android:padding="12dp"
+        android:background="#EEEEEE"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:drawablePadding="10dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textColorHint="#888888"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Retry Icon -->
+    <ImageView
+        android:id="@+id/imgRetry"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/pillit_retry"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Retry 안내 메시지 -->
+    <TextView
+        android:id="@+id/textEmptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="인식하지 못했습니다.\n다시 스캔해주십시오."
+        android:textSize="16sp"
+        android:textColor="#333"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="12dp"/>
+
+    <!-- 다시 스캔하기 버튼 -->
+    <Button
+        android:id="@+id/btnScanAgain"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="다시 스캔하기"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_round_navy"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <!-- ====================================== -->
+    <!--   🔍 성분 없음 아이콘 + 안내 메시지    -->
+    <!-- ====================================== -->
+
+    <ImageView
+        android:id="@+id/imgNoIngredientIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/pillit_notfound"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/textNoIngredientFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성분이 데이터 목록에 없습니다.\n죄송합니다. 추후 개선하겠습니다."
+        android:textSize="16sp"
+        android:textColor="#444444"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="12dp"
+        android:padding="10dp" />
+
+
+    <!-- 제품 목록 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerProductList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

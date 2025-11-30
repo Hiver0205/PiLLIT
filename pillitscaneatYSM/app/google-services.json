@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "311075231424",
+    "firebase_url": "https://pillt-scaneat-default-rtdb.firebaseio.com",
+    "project_id": "pillt-scaneat",
+    "storage_bucket": "pillt-scaneat.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311075231424:android:463c9729285afb6b00bf25",
+        "android_client_info": {
+          "package_name": "com.example.pillit_scaneat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaIlVGPB_4TmD7hMIyTXgugF7YLLC-uG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

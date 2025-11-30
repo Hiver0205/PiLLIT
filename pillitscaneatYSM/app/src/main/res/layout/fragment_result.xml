@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#FFFFFF">
+
+    <!-- ⬅ 뒤로가기 버튼 -->
+    <ImageView
+        android:id="@+id/btnBackToSymptom"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/pillit_back"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <!-- 📌 위쪽 경고/결과 표시 영역 -->
+    <LinearLayout
+        android:id="@+id/headerDangerArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnBackToSymptom"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="30dp"
+        android:paddingBottom="20dp">
+
+        <!-- ⚠️ 경고 아이콘 -->
+        <ImageView
+            android:id="@+id/iconWarning"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/pillit_analyzing"
+            android:layout_marginBottom="15dp"/>
+
+        <!-- ⚠️ 경고/안전 문구 -->
+        <TextView
+            android:id="@+id/textDanger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="결과 분석 중..."
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+    <!-- ✔ 주성분 -->
+    <TextView
+        android:id="@+id/textDrugIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="주성분: -"
+        android:textSize="18sp"
+        android:layout_below="@id/headerDangerArea"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <!-- ✔ 부작용 -->
+    <TextView
+        android:id="@+id/textSideEffect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="부작용 정보"
+        android:textSize="16sp"
+        android:layout_below="@id/textDrugIngredient"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <!-- ✔ 더보기 버튼 -->
+    <TextView
+        android:id="@+id/textMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="더보기 ▼"
+        android:textSize="16sp"
+        android:textColor="#0057FF"
+        android:layout_below="@id/textSideEffect"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <!-- ✔ 상세 정보 영역 -->
+    <!-- ✔ 상세 정보 영역 -->
+    <com.example.pillit_scaneat.SuperZoomLayout
+        android:id="@+id/detailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/textMore"
+        android:layout_marginTop="10dp"
+        android:background="#F3F3F3"
+        android:visibility="gone">
+
+        <com.example.pillit_scaneat.ZoomScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/textDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:padding="15dp"/>
+        </com.example.pillit_scaneat.ZoomScrollView>
+
+    </com.example.pillit_scaneat.SuperZoomLayout>
+
+
+
+
+
+
+    <!-- 숨겨진 OCR 원본 텍스트 저장용 (UI에 안 보임) -->
+    <TextView
+        android:id="@+id/textOcr"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone" />
+
+</RelativeLayout>

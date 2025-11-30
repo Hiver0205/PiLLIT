@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#FFFFFF">
+
+    <!-- 경고 아이콘 -->
+    <ImageView
+        android:id="@+id/imgWarning"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/pillit_notfound"
+        android:layout_marginBottom="20dp" />
+
+    <!-- 안내 문구 -->
+    <TextView
+        android:id="@+id/tvNotFoundMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="해당 성분은 데이터에 없습니다.\n추후 개선될 예정입니다."
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvNotFoundSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유효하게 인식되었지만\n등록되지 않은 성분입니다."
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_marginBottom="28dp" />
+
+    <!-- 버튼 -->
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="스캔으로 돌아가기"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_round_navy"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

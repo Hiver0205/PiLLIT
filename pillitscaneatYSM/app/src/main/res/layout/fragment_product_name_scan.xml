@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/cameraPreview2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:keepScreenOn="true" />
+
+    <TextView
+        android:id="@+id/textGuideProductScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제품명(앞면)을 화면 중앙에 맞춰주세요"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="80dp"/>
+
+    <ImageButton
+        android:id="@+id/btnCaptureProduct"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_camera_button"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:background="@android:color/transparent" />
+
+    <ImageView
+        android:id="@+id/btnBackProduct"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="top|start"
+        android:src="@drawable/pillit_back"
+        android:contentDescription="@string/back"
+        android:background="@android:color/transparent" />
+
+</FrameLayout>
