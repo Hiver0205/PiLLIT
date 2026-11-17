@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="logo-dark.png" />
   <source media="(prefers-color-scheme: light)" srcset="logo-light.png" />
-  <img src="logo-light.png" alt="PiLLIT ScanEat 로고" width="260" />
+  <img src="logo-light.png" alt="PiLLIT ScanEat 로고" width="360" />
 </picture>
 
 # PiLLIT · ScanEat
@@ -33,9 +33,9 @@
 [주요 기능](#-주요-기능) ·
 [동작 방식](#-동작-방식) ·
 [기술 스택](#-기술-스택) ·
-[폴더 구성](#-폴더-구성) ·
 [DB 구조](#-firestore-구조) ·
 [OCR 평가](#-ocr-평가-파이프라인) ·
+[폴더 구성](#-폴더-구성) ·
 [실행 방법](#-실행-방법) ·
 [결과 화면](#-결과-화면)
 
@@ -45,9 +45,36 @@
 
 ## 📖 프로젝트 소개
 
-약물 알레르기가 있는 사람은 약을 먹기 전에 성분표를 직접 읽고 확인해야 합니다. 하지만 성분명은 작고 낯선 글자로 적혀 있어 놓치기 쉽습니다.
+### 왜 만들었나요
 
-**PiLLIT**은 이 확인 과정을 대신합니다. 내 알레르기 성분과 증상 정도를 미리 등록해 두고 약 포장지를 찍기만 하면, **DANGER / WARNING / SAFETY** 세 가지 신호로 결과를 알려줍니다.
+약물 알레르기가 있는 사람은 약을 먹기 전마다 성분표를 직접 읽고 확인해야 합니다. 하지만 이 과정에는 불편한 점이 많습니다.
+
+- **성분명이 어렵습니다.** 포장지의 성분표는 글자가 작고, 낯선 화학명으로 적혀 있어 놓치기 쉽습니다.
+- **제품명만으로는 알 수 없습니다.** 같은 주성분이 서로 다른 제품명으로 팔리기 때문에, 처음 보는 약이라도 내가 피해야 할 성분이 들어 있을 수 있습니다.
+- **사람마다 위험한 정도가 다릅니다.** 같은 성분이라도 가볍게 지나가는 사람이 있고, 절대 먹으면 안 되는 사람이 있습니다.
+
+### 어떻게 해결하나요
+
+**PiLLIT**은 이 확인 과정을 사진 한 장으로 줄입니다. 내 알레르기 성분과 증상 정도를 한 번만 등록해 두면, 그다음부터는 약 포장지를 찍기만 하면 됩니다.
+
+1. **등록** — 의약품 성분 목록에서 내 알레르기 성분을 고르고, 성분마다 증상이 가벼운지 심한지 표시합니다.
+2. **스캔** — 약 포장지나 성분표를 카메라로 찍거나 갤러리에서 사진을 고릅니다.
+3. **인식** — OCR 서버가 사진에서 글자를 읽고, 앱이 의약품 DB와 대조해 주성분을 찾아냅니다.
+4. **확인** — 같은 성분의 제품 목록에서 내 약을 고르면, **DANGER / WARNING / SAFETY** 중 하나로 결과를 알려주고 부작용·효능·주의사항을 함께 보여줍니다.
+
+### 이런 점이 다릅니다
+
+| | |
+|---|---|
+| 🧪 **제품명이 아닌 주성분 기준** | 제품 이름이 달라도 같은 성분이면 잡아냅니다. |
+| 🚦 **나에게 맞춘 3단계 경고** | 내가 등록한 증상 정도에 따라 같은 약도 다른 결과가 나옵니다. |
+| 📷 **입력 없이 사진 한 장** | 성분명을 직접 타이핑하거나 검색할 필요가 없습니다. |
+| 💊 **결과와 약 정보를 한 화면에** | 위험 여부와 함께 부작용·효능·주의사항을 바로 확인합니다. |
+| 🔁 **실패해도 막히지 않는 흐름** | 글자를 못 읽으면 재촬영을, DB에 없는 약이면 별도 안내 화면을 보여줍니다. |
+
+### 누구를 위한 앱인가요
+
+약물 알레르기가 있어 약을 살 때마다 성분을 확인해야 하는 사람, 그리고 가족의 약을 대신 챙기는 보호자를 위한 앱입니다.
 
 <br/>
 
@@ -125,41 +152,6 @@ flowchart LR
 
 <br/>
 
-## 📁 폴더 구성
-
-<details>
-<summary><b>전체 구조 펼치기</b></summary>
-
-<br/>
-
-```
-PiLLIT/
-├── README.md
-├── logo-light.png, logo-dark.png   # README용 로고 (라이트·다크 모드)
-├── result_screens.png               # README용 결과 화면 이미지
-├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
-└── pillitscaneatYSM/                # 안드로이드 프로젝트
-    └── app/src/main/
-        ├── java/com/example/pillit_scaneat/
-        │   ├── SplashActivity, StartActivity          # 시작 화면
-        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
-        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
-        │   ├── AllergyFragment                        # 알레르기 성분 선택
-        │   ├── AllergySymptomFragment                 # 증상 정도 설정
-        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
-        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
-        │   ├── ProductSelectFragment                  # 제품 선택
-        │   ├── ResultFragment                         # 위험도 결과
-        │   ├── ProductDetailFragment                  # 약 상세 정보
-        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
-        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
-        └── res/                                       # 레이아웃·이미지·문자열
-```
-
-</details>
-
-<br/>
-
 ## 🗄 Firestore 구조
 
 ```mermaid
@@ -220,6 +212,41 @@ flowchart LR
 ```bash
 pip install opencv-python pillow numpy matplotlib requests
 python "Add OCR evaluation pipeline"
+```
+
+</details>
+
+<br/>
+
+## 📁 폴더 구성
+
+<details>
+<summary><b>전체 구조 펼치기</b></summary>
+
+<br/>
+
+```
+PiLLIT/
+├── README.md
+├── logo-light.png, logo-dark.png   # README용 로고 (라이트·다크 모드)
+├── result_screens.png               # README용 결과 화면 이미지
+├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
+└── pillitscaneatYSM/                # 안드로이드 프로젝트
+    └── app/src/main/
+        ├── java/com/example/pillit_scaneat/
+        │   ├── SplashActivity, StartActivity          # 시작 화면
+        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
+        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
+        │   ├── AllergyFragment                        # 알레르기 성분 선택
+        │   ├── AllergySymptomFragment                 # 증상 정도 설정
+        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
+        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
+        │   ├── ProductSelectFragment                  # 제품 선택
+        │   ├── ResultFragment                         # 위험도 결과
+        │   ├── ProductDetailFragment                  # 약 상세 정보
+        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
+        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
+        └── res/                                       # 레이아웃·이미지·문자열
 ```
 
 </details>
