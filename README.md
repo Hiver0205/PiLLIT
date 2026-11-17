@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="pillitscaneatYSM/app/src/main/res/drawable/scaneat_logo.png" alt="PiLLIT ScanEat 로고" width="220" />
+<img src="logo.png" alt="PiLLIT ScanEat 로고" width="300" />
 
 # PiLLIT · ScanEat
 
@@ -14,6 +14,7 @@
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+<br/>
 ![CameraX](https://img.shields.io/badge/CameraX-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
@@ -232,6 +233,8 @@ git clone https://github.com/Hiver0205/PiLLIT.git
 
 ```
 PiLLIT/
+├── README.md
+├── logo.png                         # README용 로고
 ├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
 └── pillitscaneatYSM/                # 안드로이드 프로젝트
     └── app/src/main/
