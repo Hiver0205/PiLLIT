@@ -1,116 +1,234 @@
-# PiLLIT (ScanEat)
+<div align="center">
 
-> **약 포장지를 찍으면 내 알레르기 성분이 들어 있는지 알려주는 안드로이드 앱**
-> An Android app that scans medicine packaging with OCR and warns you if it contains an ingredient you are allergic to.
+<img src="pillitscaneatYSM/app/src/main/res/drawable/scaneat_logo.png" alt="PiLLIT ScanEat 로고" width="220" />
 
----
+# PiLLIT · ScanEat
 
-## 프로젝트 소개
+### 💊 찍으면 알려주는 약물 알레르기 확인 앱
+
+약 포장지를 카메라로 찍으면 OCR로 주성분을 읽고,<br/>
+내 알레르기와 비교해 **먹어도 되는 약인지** 바로 알려줍니다.
+
+<br/>
+
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![CameraX](https://img.shields.io/badge/CameraX-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+
+![minSdk](https://img.shields.io/badge/minSdk-24-1F2A44?style=flat-square)
+![platform](https://img.shields.io/badge/platform-Android-1F2A44?style=flat-square)
+![purpose](https://img.shields.io/badge/purpose-study%20%26%20research-1F2A44?style=flat-square)
+
+<br/>
+
+[소개](#-프로젝트-소개) ·
+[주요 기능](#-주요-기능) ·
+[동작 방식](#-동작-방식) ·
+[기술 스택](#-기술-스택) ·
+[OCR 평가](#-ocr-평가-파이프라인) ·
+[실행 방법](#-실행-방법)
+
+</div>
+
+<br/>
+
+## 📖 프로젝트 소개
 
 약물 알레르기가 있는 사람은 약을 먹기 전에 성분표를 직접 읽고 확인해야 합니다. 하지만 성분명은 작고 낯선 글자로 적혀 있어 놓치기 쉽습니다.
 
-**PiLLIT**은 이 확인 과정을 대신합니다. 미리 내 알레르기 성분과 증상 정도를 등록해 두고, 약 포장지나 성분표를 카메라로 찍으면 OCR로 주성분을 읽어 **DANGER / WARNING / SAFETY** 세 단계로 알려줍니다. 해당 약의 부작용·효능·주의사항도 함께 보여줍니다.
+**PiLLIT**은 이 확인 과정을 대신합니다. 내 알레르기 성분과 증상 정도를 미리 등록해 두고 약 포장지를 찍기만 하면, 세 가지 신호로 결과를 알려줍니다.
 
----
+<br/>
 
-## 이런 걸 할 수 있어요
+<div align="center">
 
-- 👤 **회원가입·로그인** — Firebase Authentication 기반 이메일 계정
-- 📝 **알레르기 등록** — 의약품 성분 목록에서 검색해 내 알레르기 성분을 선택
-- 🌡️ **증상 정도 설정** — 성분별로 가벼움(mild) / 심함(severe)을 지정
-- 📷 **약 스캔** — 카메라 촬영 또는 갤러리 이미지를 OCR 서버로 전송
-- 🔎 **성분 매칭** — OCR 텍스트에서 의약품 DB의 주성분을 찾아내고, 같은 성분의 제품 목록에서 내 약을 선택
-- 🚦 **위험도 판정** — 내 알레르기 정보와 비교해 DANGER / WARNING / SAFETY 표시
-- 💊 **약 정보 확인** — 부작용, 효능, 주의사항을 확대 가능한 화면으로 제공
+<table>
+  <tr>
+    <td align="center" width="240">
+      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_danger.png" alt="DANGER" width="96" /><br/><br/>
+      <b>🔴 DANGER</b><br/>
+      <sub>심한 알레르기로 등록한 성분<br/>복용하지 마세요</sub>
+    </td>
+    <td align="center" width="240">
+      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_warning.png" alt="WARNING" width="110" /><br/><br/>
+      <b>🟠 WARNING</b><br/>
+      <sub>가벼운 알레르기로 등록한 성분<br/>복용에 주의하세요</sub>
+    </td>
+    <td align="center" width="240">
+      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_safety.png" alt="SAFETY" width="96" /><br/><br/>
+      <b>🟢 SAFETY</b><br/>
+      <sub>등록한 알레르기에 없는 성분<br/>안전해요</sub>
+    </td>
+  </tr>
+</table>
 
----
+</div>
 
-## 어떻게 동작하나요
+<br/>
 
-```
-촬영/이미지 선택 → OCR 서버(텍스트 추출) → 주성분 매칭(Firestore) → 제품 선택 → 내 알레르기와 비교 → 위험도 + 약 정보 표시
+## ✨ 주요 기능
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h4>👤 회원가입 · 로그인</h4>
+      Firebase Authentication 기반 이메일 계정으로 내 정보를 안전하게 보관합니다.
+    </td>
+    <td width="50%" valign="top">
+      <h4>📝 알레르기 등록</h4>
+      의약품 성분 목록에서 검색해 내 알레르기 성분을 고릅니다.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <h4>🌡️ 증상 정도 설정</h4>
+      성분마다 가벼움(mild) 또는 심함(severe)을 지정해 경고 수준을 나눕니다.
+    </td>
+    <td valign="top">
+      <h4>📷 약 스캔</h4>
+      카메라로 찍거나 갤러리 이미지를 골라 OCR 서버로 보냅니다.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <h4>🔎 성분 매칭</h4>
+      OCR 텍스트에서 의약품 DB의 주성분을 찾아내고, 같은 성분의 제품 중 내 약을 선택합니다.
+    </td>
+    <td valign="top">
+      <h4>💊 약 정보 확인</h4>
+      부작용, 효능, 주의사항을 확대해서 볼 수 있는 화면으로 제공합니다.
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+## 🔄 동작 방식
+
+```mermaid
+flowchart LR
+    A["📷 촬영 / 이미지 선택"] --> B["🖥️ OCR 서버<br/>텍스트 추출"]
+    B --> C{"텍스트를<br/>읽었나요?"}
+    C -- 아니오 --> F1["🔁 재촬영 안내"]
+    C -- 예 --> D{"DB에 있는<br/>주성분인가요?"}
+    D -- 아니오 --> F2["❓ 찾을 수 없음"]
+    D -- 예 --> E["📋 제품 선택"]
+    E --> G{"내 알레르기와<br/>비교"}
+    G -- "severe (2)" --> R1["🔴 DANGER"]
+    G -- "mild (1)" --> R2["🟠 WARNING"]
+    G -- "미등록" --> R3["🟢 SAFETY"]
 ```
 
 1. 앱이 이미지를 JPEG로 압축해 OCR 서버(`/ocr`)에 `multipart/form-data`로 전송합니다.
 2. 받은 텍스트에서 한글·영문·숫자만 남겨 정규화한 뒤, Firestore `drugs_v2` 컬렉션의 `주성분`이 포함되어 있는지 찾습니다.
 3. 일치하는 성분의 제품 목록을 보여주고, 사용자가 실제 제품을 고릅니다.
-4. 사용자의 알레르기 등록 정보(`prefix`)와 비교해 결과를 판정합니다.
+4. 사용자의 알레르기 등록 정보(`prefix`)와 비교해 결과를 판정하고, 약의 상세 정보를 함께 보여줍니다.
 
-| 등록 상태 | 값 | 결과 |
-|---|---|---|
-| 심함(severe) | `2` | 🔴 DANGER — 복용하지 마세요 |
-| 가벼움(mild) | `1` | 🟠 WARNING — 복용에 주의하세요 |
-| 미등록 | 없음 / `0` | 🟢 SAFETY — 안전해요 |
+<br/>
 
-텍스트를 읽지 못하면 재촬영 안내 화면으로, DB에 없는 성분·제품이면 "찾을 수 없음" 화면으로 이동합니다.
-
----
-
-## 기술 스택
+## 🛠 기술 스택
 
 | 구분 | 사용 기술 |
-|---|---|
-| 앱 | Android (Java), Fragment 기반 단일 Activity 구조, Material Components |
-| 카메라 | CameraX |
-| 인증 | Firebase Authentication |
-| 데이터베이스 | Cloud Firestore |
-| 파일 저장 | Firebase Storage |
-| OCR | 별도 OCR 서버(HTTP API)와 `HttpURLConnection`으로 통신 |
-| 평가 | Python (OpenCV, Pillow, NumPy, Matplotlib, Requests) |
+|:---:|---|
+| **앱** | Android (Java) · Fragment 기반 단일 Activity 구조 · Material Components |
+| **카메라** | CameraX |
+| **인증** | Firebase Authentication |
+| **데이터베이스** | Cloud Firestore |
+| **파일 저장** | Firebase Storage |
+| **OCR** | 별도 OCR 서버(HTTP API) · `HttpURLConnection` 통신 |
+| **평가** | Python · OpenCV · Pillow · NumPy · Matplotlib · Requests |
 
----
+<br/>
 
-## Firestore 구조
+## 🗄 Firestore 구조
 
+```mermaid
+erDiagram
+    USERS ||--|| MY_ALLERGIES : "allergies/myAllergies"
+    USERS ||--o{ SELECTED_PRODUCTS : "selectedProducts"
+    DRUGS_V2 ||--o{ SELECTED_PRODUCTS : "제품명"
+
+    USERS {
+        string name
+        string email
+    }
+    MY_ALLERGIES {
+        array selectedIngredients "선택한 알레르기 성분"
+        map mild "성분별 가벼움 여부"
+        map severe "성분별 심함 여부"
+        map prefix "성분별 판정 값 0·1·2"
+    }
+    SELECTED_PRODUCTS {
+        string product "스캔 후 선택한 제품"
+    }
+    DRUGS_V2 {
+        string 제품명
+        string 주성분
+        string 부작용
+        string 효능
+        string 주의사항
+    }
 ```
-drugs_v2/{문서}
-  ├── 제품명, 제품명_lower
-  ├── 주성분
-  └── 부작용, 효능, 주의사항
 
-users/{uid}
-  ├── name, email
-  ├── allergies/myAllergies
-  │     ├── selectedIngredients   # 선택한 알레르기 성분 목록
-  │     ├── mild / severe         # 성분별 증상 정도
-  │     └── prefix                # 성분별 판정 값 (0 / 1 / 2)
-  └── selectedProducts/{성분명}    # 스캔 후 선택한 제품
-```
+<br/>
 
----
-
-## OCR 평가 파이프라인
+## 📊 OCR 평가 파이프라인
 
 저장소 루트의 `Add OCR evaluation pipeline` 파일은 OCR 서버의 성분 인식 성능을 측정하는 Python 스크립트입니다.
 
-1. `test_images/`의 원본 이미지를 불러옵니다.
-2. 이미지마다 10장을 증강합니다 (약한 변형 8장 + 중간 변형 2장: 밝기·대비·블러·회전·크롭·노이즈·JPEG 압축).
-3. OCR API 결과와 `ground_truth/`의 정답 성분명을 비교합니다. OCR 텍스트를 정답 길이만큼 슬라이딩하며 **Levenshtein 거리 기반 유사도**의 최댓값을 구합니다.
-4. 이미지별 막대그래프, 평균 유사도 도넛 그래프, 결과 CSV를 저장합니다.
+```mermaid
+flowchart LR
+    S1["원본 이미지<br/>test_images/"] --> S2["이미지 증강<br/>약한 변형 8 + 중간 변형 2"]
+    S2 --> S3["OCR API 호출"]
+    S3 --> S4["정답과 비교<br/>Levenshtein 유사도"]
+    S4 --> S5["그래프 · CSV 저장"]
+```
+
+| 단계 | 내용 |
+|:---:|---|
+| **증강** | 밝기 · 대비 · 블러 · 회전 · 크롭 · 노이즈 · JPEG 압축을 무작위로 적용 |
+| **비교** | OCR 텍스트를 정답 길이만큼 슬라이딩하며 Levenshtein 거리 기반 유사도의 최댓값 계산 |
+| **결과** | 이미지별 막대그래프 · 평균 유사도 도넛 그래프 · `ingredient_results.csv` |
+
+<details>
+<summary><b>실행 방법 펼치기</b></summary>
+
+<br/>
+
+`test_images/`(이미지)와 `ground_truth/`(같은 이름의 `.txt` 정답 파일) 폴더를 먼저 준비합니다.
 
 ```bash
 pip install opencv-python pillow numpy matplotlib requests
 python "Add OCR evaluation pipeline"
 ```
 
-실행 전에 `test_images/`(이미지)와 `ground_truth/`(같은 이름의 `.txt` 정답 파일) 폴더를 준비해야 합니다.
+</details>
 
----
+<br/>
 
-## 실행 방법
+## 🚀 실행 방법
 
-1. 저장소를 내려받습니다.
-   ```bash
-   git clone https://github.com/Hiver0205/PiLLIT.git
-   ```
-2. Android Studio에서 `pillitscaneatYSM` 폴더를 엽니다.
-3. Gradle 동기화가 끝나면 에뮬레이터나 실제 기기에서 실행합니다. (minSdk 24)
+```bash
+git clone https://github.com/Hiver0205/PiLLIT.git
+```
 
-앱은 Firebase 프로젝트와 OCR 서버에 연결되어야 동작합니다. 직접 구성하려면 Firebase 프로젝트에서 Authentication·Firestore·Storage를 켜고 `app/google-services.json`을 본인 것으로 교체한 뒤, `drugs_v2` 컬렉션에 의약품 데이터를 넣어야 합니다.
+1. Android Studio에서 `pillitscaneatYSM` 폴더를 엽니다.
+2. Gradle 동기화가 끝나면 에뮬레이터나 실제 기기에서 실행합니다. (minSdk 24)
 
----
+> [!NOTE]
+> 앱은 Firebase 프로젝트와 OCR 서버에 연결되어야 동작합니다. 직접 구성하려면 Firebase에서 Authentication · Firestore · Storage를 켜고 `app/google-services.json`을 본인 것으로 교체한 뒤, `drugs_v2` 컬렉션에 의약품 데이터를 넣어야 합니다.
 
-## 폴더 구성
+<br/>
+
+## 📁 폴더 구성
+
+<details>
+<summary><b>전체 구조 펼치기</b></summary>
+
+<br/>
 
 ```
 PiLLIT/
@@ -133,6 +251,16 @@ PiLLIT/
         └── res/                                       # 레이아웃·이미지·문자열
 ```
 
+</details>
+
+<br/>
+
 ---
 
-> ⚠️ 본 앱은 학습·연구 목적의 **보조 도구**이며, 의사·약사의 전문적인 판단을 대체하지 않습니다. OCR 인식 오류나 DB에 없는 약이 있을 수 있으므로, 실제 복용 전에는 반드시 전문가와 상담하세요.
+> [!WARNING]
+> 본 앱은 학습·연구 목적의 **보조 도구**이며, 의사·약사의 전문적인 판단을 대체하지 않습니다. OCR 인식 오류나 DB에 없는 약이 있을 수 있으므로, 실제 복용 전에는 반드시 전문가와 상담하세요.
+
+<div align="center">
+<br/>
+<sub>Made with 💊 by PiLLIT Team</sub>
+</div>
