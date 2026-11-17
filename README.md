@@ -32,10 +32,12 @@
 [소개](#-프로젝트-소개) ·
 [주요 기능](#-주요-기능) ·
 [동작 방식](#-동작-방식) ·
-[결과 화면](#-결과-화면) ·
 [기술 스택](#-기술-스택) ·
+[폴더 구성](#-폴더-구성) ·
+[DB 구조](#-firestore-구조) ·
 [OCR 평가](#-ocr-평가-파이프라인) ·
-[실행 방법](#-실행-방법)
+[실행 방법](#-실행-방법) ·
+[결과 화면](#-결과-화면)
 
 </div>
 
@@ -45,33 +47,7 @@
 
 약물 알레르기가 있는 사람은 약을 먹기 전에 성분표를 직접 읽고 확인해야 합니다. 하지만 성분명은 작고 낯선 글자로 적혀 있어 놓치기 쉽습니다.
 
-**PiLLIT**은 이 확인 과정을 대신합니다. 내 알레르기 성분과 증상 정도를 미리 등록해 두고 약 포장지를 찍기만 하면, 세 가지 신호로 결과를 알려줍니다.
-
-<br/>
-
-<div align="center">
-
-<table>
-  <tr>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_danger.png" alt="DANGER" width="96" /><br/><br/>
-      <b>🔴 DANGER</b><br/>
-      <sub>심한 알레르기로 등록한 성분<br/>복용하지 마세요</sub>
-    </td>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_warning.png" alt="WARNING" width="110" /><br/><br/>
-      <b>🟠 WARNING</b><br/>
-      <sub>가벼운 알레르기로 등록한 성분<br/>복용에 주의하세요</sub>
-    </td>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_safety.png" alt="SAFETY" width="96" /><br/><br/>
-      <b>🟢 SAFETY</b><br/>
-      <sub>등록한 알레르기에 없는 성분<br/>안전해요</sub>
-    </td>
-  </tr>
-</table>
-
-</div>
+**PiLLIT**은 이 확인 과정을 대신합니다. 내 알레르기 성분과 증상 정도를 미리 등록해 두고 약 포장지를 찍기만 하면, **DANGER / WARNING / SAFETY** 세 가지 신호로 결과를 알려줍니다.
 
 <br/>
 
@@ -135,18 +111,6 @@ flowchart LR
 
 <br/>
 
-## 📱 결과 화면
-
-<div align="center">
-
-<img src="result_screens.png" alt="DANGER, WARNING, SAFETY 결과 화면" width="820" />
-
-<sub>등록한 알레르기 정도에 따라 같은 약도 다른 결과로 표시됩니다. (앱 레이아웃을 바탕으로 재구성한 예시 화면)</sub>
-
-</div>
-
-<br/>
-
 ## 🛠 기술 스택
 
 | 구분 | 사용 기술 |
@@ -158,6 +122,41 @@ flowchart LR
 | **파일 저장** | Firebase Storage |
 | **OCR** | 별도 OCR 서버(HTTP API) · `HttpURLConnection` 통신 |
 | **평가** | Python · OpenCV · Pillow · NumPy · Matplotlib · Requests |
+
+<br/>
+
+## 📁 폴더 구성
+
+<details>
+<summary><b>전체 구조 펼치기</b></summary>
+
+<br/>
+
+```
+PiLLIT/
+├── README.md
+├── logo-light.png, logo-dark.png   # README용 로고 (라이트·다크 모드)
+├── result_screens.png               # README용 결과 화면 이미지
+├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
+└── pillitscaneatYSM/                # 안드로이드 프로젝트
+    └── app/src/main/
+        ├── java/com/example/pillit_scaneat/
+        │   ├── SplashActivity, StartActivity          # 시작 화면
+        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
+        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
+        │   ├── AllergyFragment                        # 알레르기 성분 선택
+        │   ├── AllergySymptomFragment                 # 증상 정도 설정
+        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
+        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
+        │   ├── ProductSelectFragment                  # 제품 선택
+        │   ├── ResultFragment                         # 위험도 결과
+        │   ├── ProductDetailFragment                  # 약 상세 정보
+        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
+        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
+        └── res/                                       # 레이아웃·이미지·문자열
+```
+
+</details>
 
 <br/>
 
@@ -241,38 +240,43 @@ git clone https://github.com/Hiver0205/PiLLIT.git
 
 <br/>
 
-## 📁 폴더 구성
+## 📱 결과 화면
 
-<details>
-<summary><b>전체 구조 펼치기</b></summary>
+스캔이 끝나면 내 알레르기 등록 정보에 따라 세 가지 중 하나의 결과가 표시됩니다.
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="240">
+      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_danger.png" alt="DANGER" width="96" /><br/><br/>
+      <b>🔴 DANGER</b><br/>
+      <sub>심한 알레르기로 등록한 성분<br/>복용하지 마세요</sub>
+    </td>
+    <td align="center" width="240">
+      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_warning.png" alt="WARNING" width="110" /><br/><br/>
+      <b>🟠 WARNING</b><br/>
+      <sub>가벼운 알레르기로 등록한 성분<br/>복용에 주의하세요</sub>
+    </td>
+    <td align="center" width="240">
+      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_safety.png" alt="SAFETY" width="96" /><br/><br/>
+      <b>🟢 SAFETY</b><br/>
+      <sub>등록한 알레르기에 없는 성분<br/>안전해요</sub>
+    </td>
+  </tr>
+</table>
+
+</div>
 
 <br/>
 
-```
-PiLLIT/
-├── README.md
-├── logo-light.png, logo-dark.png   # README용 로고 (라이트·다크 모드)
-├── result_screens.png               # README용 결과 화면 이미지
-├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
-└── pillitscaneatYSM/                # 안드로이드 프로젝트
-    └── app/src/main/
-        ├── java/com/example/pillit_scaneat/
-        │   ├── SplashActivity, StartActivity          # 시작 화면
-        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
-        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
-        │   ├── AllergyFragment                        # 알레르기 성분 선택
-        │   ├── AllergySymptomFragment                 # 증상 정도 설정
-        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
-        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
-        │   ├── ProductSelectFragment                  # 제품 선택
-        │   ├── ResultFragment                         # 위험도 결과
-        │   ├── ProductDetailFragment                  # 약 상세 정보
-        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
-        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
-        └── res/                                       # 레이아웃·이미지·문자열
-```
+<div align="center">
 
-</details>
+<img src="result_screens.png" alt="DANGER, WARNING, SAFETY 결과 화면" width="820" />
+
+<sub>등록한 알레르기 정도에 따라 같은 약도 다른 결과로 표시됩니다. (앱 레이아웃을 바탕으로 재구성한 예시 화면)</sub>
+
+</div>
 
 <br/>
 
