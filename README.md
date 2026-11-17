@@ -291,41 +291,28 @@ git clone https://github.com/Hiver0205/PiLLIT.git
 
 ## 📱 결과 화면
 
-스캔이 끝나면 내 알레르기 등록 정보에 따라 세 가지 중 하나의 결과가 표시됩니다.
+스캔이 끝나면 내 알레르기 등록 정보에 따라 세 가지 화면 중 하나가 표시됩니다. 같은 약이라도 등록한 증상 정도에 따라 결과가 달라집니다.
 
 <div align="center">
 
 <table>
   <tr>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_danger.png" alt="DANGER" width="96" /><br/><br/>
-      <b>🔴 DANGER</b><br/>
-      <sub>심한 알레르기로 등록한 성분<br/>복용하지 마세요</sub>
-    </td>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_warning.png" alt="WARNING" width="110" /><br/><br/>
-      <b>🟠 WARNING</b><br/>
-      <sub>가벼운 알레르기로 등록한 성분<br/>복용에 주의하세요</sub>
-    </td>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_safety.png" alt="SAFETY" width="96" /><br/><br/>
-      <b>🟢 SAFETY</b><br/>
-      <sub>등록한 알레르기에 없는 성분<br/>안전해요</sub>
-    </td>
+    <td align="center" width="33%"><img src="docs/images/result_danger.png" alt="DANGER 결과 화면" width="240" /></td>
+    <td align="center" width="33%"><img src="docs/images/result_warning.png" alt="WARNING 결과 화면" width="240" /></td>
+    <td align="center" width="33%"><img src="docs/images/result_safety.png" alt="SAFETY 결과 화면" width="240" /></td>
+  </tr>
+  <tr>
+    <td align="center"><b>🔴 DANGER</b><br/><sub>심한 알레르기로 등록한 성분<br/>복용하지 마세요</sub></td>
+    <td align="center"><b>🟠 WARNING</b><br/><sub>가벼운 알레르기로 등록한 성분<br/>복용에 주의하세요</sub></td>
+    <td align="center"><b>🟢 SAFETY</b><br/><sub>등록한 알레르기에 없는 성분<br/>안전해요</sub></td>
   </tr>
 </table>
 
-</div>
-
-<br/>
-
-<div align="center">
-
-<img src="docs/images/result_screens.png" alt="DANGER, WARNING, SAFETY 결과 화면" width="820" />
-
-<sub>등록한 알레르기 정도에 따라 같은 약도 다른 결과로 표시됩니다. (앱 레이아웃을 바탕으로 재구성한 예시 화면)</sub>
+<sub>앱 레이아웃을 바탕으로 재구성한 예시 화면이며, 성분명과 부작용 문구는 예시입니다.</sub>
 
 </div>
+
+각 화면에는 위험도와 함께 주성분, 부작용이 표시되고, **더보기**를 누르면 효능과 주의사항을 확대해서 볼 수 있습니다.
 
 <br/>
 
