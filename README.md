@@ -33,9 +33,9 @@
 [주요 기능](#-주요-기능) ·
 [동작 방식](#-동작-방식) ·
 [기술 스택](#-기술-스택) ·
-[폴더 구성](#-폴더-구성) ·
 [DB 구조](#-firestore-구조) ·
 [OCR 평가](#-ocr-평가-파이프라인) ·
+[폴더 구성](#-폴더-구성) ·
 [실행 방법](#-실행-방법) ·
 [결과 화면](#-결과-화면)
 
@@ -175,40 +175,6 @@ flowchart LR
 
 <br/>
 
-## 📁 폴더 구성
-
-<details>
-<summary><b>전체 구조 펼치기</b></summary>
-
-<br/>
-
-```
-PiLLIT/
-├── README.md
-├── docs/images/                     # README용 이미지 (로고·화면 예시)
-├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
-└── pillitscaneatYSM/                # 안드로이드 프로젝트
-    └── app/src/main/
-        ├── java/com/example/pillit_scaneat/
-        │   ├── SplashActivity, StartActivity          # 시작 화면
-        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
-        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
-        │   ├── AllergyFragment                        # 알레르기 성분 선택
-        │   ├── AllergySymptomFragment                 # 증상 정도 설정
-        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
-        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
-        │   ├── ProductSelectFragment                  # 제품 선택
-        │   ├── ResultFragment                         # 위험도 결과
-        │   ├── ProductDetailFragment                  # 약 상세 정보
-        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
-        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
-        └── res/                                       # 레이아웃·이미지·문자열
-```
-
-</details>
-
-<br/>
-
 ## 🗄 Firestore 구조
 
 ```mermaid
@@ -269,6 +235,40 @@ flowchart LR
 ```bash
 pip install opencv-python pillow numpy matplotlib requests
 python "Add OCR evaluation pipeline"
+```
+
+</details>
+
+<br/>
+
+## 📁 폴더 구성
+
+<details>
+<summary><b>전체 구조 펼치기</b></summary>
+
+<br/>
+
+```
+PiLLIT/
+├── README.md
+├── docs/images/                     # README용 이미지 (로고·화면 예시)
+├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
+└── pillitscaneatYSM/                # 안드로이드 프로젝트
+    └── app/src/main/
+        ├── java/com/example/pillit_scaneat/
+        │   ├── SplashActivity, StartActivity          # 시작 화면
+        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
+        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
+        │   ├── AllergyFragment                        # 알레르기 성분 선택
+        │   ├── AllergySymptomFragment                 # 증상 정도 설정
+        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
+        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
+        │   ├── ProductSelectFragment                  # 제품 선택
+        │   ├── ResultFragment                         # 위험도 결과
+        │   ├── ProductDetailFragment                  # 약 상세 정보
+        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
+        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
+        └── res/                                       # 레이아웃·이미지·문자열
 ```
 
 </details>
