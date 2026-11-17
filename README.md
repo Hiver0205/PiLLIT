@@ -1,6 +1,10 @@
 <div align="center">
 
-<img src="logo.png" alt="PiLLIT ScanEat 로고" width="300" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="logo-dark.png" />
+  <source media="(prefers-color-scheme: light)" srcset="logo-light.png" />
+  <img src="logo-light.png" alt="PiLLIT ScanEat 로고" width="260" />
+</picture>
 
 # PiLLIT · ScanEat
 
@@ -26,9 +30,9 @@
 <br/>
 
 [소개](#-프로젝트-소개) ·
-[결과 화면](#-결과-화면) ·
 [주요 기능](#-주요-기능) ·
 [동작 방식](#-동작-방식) ·
+[결과 화면](#-결과-화면) ·
 [기술 스택](#-기술-스택) ·
 [OCR 평가](#-ocr-평가-파이프라인) ·
 [실행 방법](#-실행-방법)
@@ -66,18 +70,6 @@
     </td>
   </tr>
 </table>
-
-</div>
-
-<br/>
-
-## 📱 결과 화면
-
-<div align="center">
-
-<img src="result_screens.png" alt="DANGER, WARNING, SAFETY 결과 화면" width="820" />
-
-<sub>등록한 알레르기 정도에 따라 같은 약도 다른 결과로 표시됩니다. (앱 레이아웃을 바탕으로 재구성한 예시 화면)</sub>
 
 </div>
 
@@ -140,6 +132,18 @@ flowchart LR
 2. 받은 텍스트에서 한글·영문·숫자만 남겨 정규화한 뒤, Firestore `drugs_v2` 컬렉션의 `주성분`이 포함되어 있는지 찾습니다.
 3. 일치하는 성분의 제품 목록을 보여주고, 사용자가 실제 제품을 고릅니다.
 4. 사용자의 알레르기 등록 정보(`prefix`)와 비교해 결과를 판정하고, 약의 상세 정보를 함께 보여줍니다.
+
+<br/>
+
+## 📱 결과 화면
+
+<div align="center">
+
+<img src="result_screens.png" alt="DANGER, WARNING, SAFETY 결과 화면" width="820" />
+
+<sub>등록한 알레르기 정도에 따라 같은 약도 다른 결과로 표시됩니다. (앱 레이아웃을 바탕으로 재구성한 예시 화면)</sub>
+
+</div>
 
 <br/>
 
@@ -247,7 +251,7 @@ git clone https://github.com/Hiver0205/PiLLIT.git
 ```
 PiLLIT/
 ├── README.md
-├── logo.png                         # README용 로고
+├── logo-light.png, logo-dark.png   # README용 로고 (라이트·다크 모드)
 ├── result_screens.png               # README용 결과 화면 이미지
 ├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
 └── pillitscaneatYSM/                # 안드로이드 프로젝트
