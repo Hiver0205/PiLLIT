@@ -1,9 +1,9 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="logo-dark.png" />
-  <source media="(prefers-color-scheme: light)" srcset="logo-light.png" />
-  <img src="logo-light.png" alt="PiLLIT ScanEat 로고" width="360" />
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/logo-dark.png" />
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/logo-light.png" />
+  <img src="docs/images/logo-light.png" alt="PiLLIT ScanEat 로고" width="360" />
 </picture>
 
 # PiLLIT · ScanEat
@@ -33,9 +33,9 @@
 [주요 기능](#-주요-기능) ·
 [동작 방식](#-동작-방식) ·
 [기술 스택](#-기술-스택) ·
+[폴더 구성](#-폴더-구성) ·
 [DB 구조](#-firestore-구조) ·
 [OCR 평가](#-ocr-평가-파이프라인) ·
-[폴더 구성](#-폴더-구성) ·
 [실행 방법](#-실행-방법) ·
 [결과 화면](#-결과-화면)
 
@@ -136,6 +136,29 @@ flowchart LR
 3. 일치하는 성분의 제품 목록을 보여주고, 사용자가 실제 제품을 고릅니다.
 4. 사용자의 알레르기 등록 정보(`prefix`)와 비교해 결과를 판정하고, 약의 상세 정보를 함께 보여줍니다.
 
+### 화면으로 보는 스캔 과정
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/images/scan_1_allergy.png" alt="알레르기 등록 화면" width="190" /></td>
+    <td align="center" width="25%"><img src="docs/images/scan_2_method.png" alt="스캔 방법 선택 화면" width="190" /></td>
+    <td align="center" width="25%"><img src="docs/images/scan_3_product.png" alt="제품 선택 화면" width="190" /></td>
+    <td align="center" width="25%"><img src="docs/images/scan_4_result.png" alt="결과 화면" width="190" /></td>
+  </tr>
+  <tr>
+    <td align="center"><b>① 알레르기 등록</b><br/><sub>성분을 검색해 체크</sub></td>
+    <td align="center"><b>② 스캔 방법 선택</b><br/><sub>카메라 촬영 또는 이미지 업로드</sub></td>
+    <td align="center"><b>③ 제품 선택</b><br/><sub>인식된 성분의 제품 중 내 약 선택</sub></td>
+    <td align="center"><b>④ 결과 확인</b><br/><sub>위험도와 약 정보 표시</sub></td>
+  </tr>
+</table>
+
+<sub>앱 레이아웃을 바탕으로 재구성한 예시 화면이며, 성분·제품명은 예시입니다.</sub>
+
+</div>
+
 <br/>
 
 ## 🛠 기술 스택
@@ -149,6 +172,40 @@ flowchart LR
 | **파일 저장** | Firebase Storage |
 | **OCR** | 별도 OCR 서버(HTTP API) · `HttpURLConnection` 통신 |
 | **평가** | Python · OpenCV · Pillow · NumPy · Matplotlib · Requests |
+
+<br/>
+
+## 📁 폴더 구성
+
+<details>
+<summary><b>전체 구조 펼치기</b></summary>
+
+<br/>
+
+```
+PiLLIT/
+├── README.md
+├── docs/images/                     # README용 이미지 (로고·화면 예시)
+├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
+└── pillitscaneatYSM/                # 안드로이드 프로젝트
+    └── app/src/main/
+        ├── java/com/example/pillit_scaneat/
+        │   ├── SplashActivity, StartActivity          # 시작 화면
+        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
+        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
+        │   ├── AllergyFragment                        # 알레르기 성분 선택
+        │   ├── AllergySymptomFragment                 # 증상 정도 설정
+        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
+        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
+        │   ├── ProductSelectFragment                  # 제품 선택
+        │   ├── ResultFragment                         # 위험도 결과
+        │   ├── ProductDetailFragment                  # 약 상세 정보
+        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
+        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
+        └── res/                                       # 레이아웃·이미지·문자열
+```
+
+</details>
 
 <br/>
 
@@ -218,41 +275,6 @@ python "Add OCR evaluation pipeline"
 
 <br/>
 
-## 📁 폴더 구성
-
-<details>
-<summary><b>전체 구조 펼치기</b></summary>
-
-<br/>
-
-```
-PiLLIT/
-├── README.md
-├── logo-light.png, logo-dark.png   # README용 로고 (라이트·다크 모드)
-├── result_screens.png               # README용 결과 화면 이미지
-├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
-└── pillitscaneatYSM/                # 안드로이드 프로젝트
-    └── app/src/main/
-        ├── java/com/example/pillit_scaneat/
-        │   ├── SplashActivity, StartActivity          # 시작 화면
-        │   ├── LoginActivity, SignupActivity          # 로그인·회원가입
-        │   ├── MainActivity, HomeFragment             # 메인·내비게이션
-        │   ├── AllergyFragment                        # 알레르기 성분 선택
-        │   ├── AllergySymptomFragment                 # 증상 정도 설정
-        │   ├── ScanMenuFragment, ScanFragment         # 스캔 메뉴·촬영/업로드
-        │   ├── ScanCameraFragment, ImageScanFragment  # 카메라·이미지 스캔
-        │   ├── ProductSelectFragment                  # 제품 선택
-        │   ├── ResultFragment                         # 위험도 결과
-        │   ├── ProductDetailFragment                  # 약 상세 정보
-        │   ├── OCRFailFragment, NotFoundFragment      # 실패·미등록 안내
-        │   └── UserInfoFragment, ChangePasswordActivity  # 내 정보
-        └── res/                                       # 레이아웃·이미지·문자열
-```
-
-</details>
-
-<br/>
-
 ## 🚀 실행 방법
 
 ```bash
@@ -269,41 +291,28 @@ git clone https://github.com/Hiver0205/PiLLIT.git
 
 ## 📱 결과 화면
 
-스캔이 끝나면 내 알레르기 등록 정보에 따라 세 가지 중 하나의 결과가 표시됩니다.
+스캔이 끝나면 내 알레르기 등록 정보에 따라 세 가지 화면 중 하나가 표시됩니다. 같은 약이라도 등록한 증상 정도에 따라 결과가 달라집니다.
 
 <div align="center">
 
 <table>
   <tr>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_danger.png" alt="DANGER" width="96" /><br/><br/>
-      <b>🔴 DANGER</b><br/>
-      <sub>심한 알레르기로 등록한 성분<br/>복용하지 마세요</sub>
-    </td>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_warning.png" alt="WARNING" width="110" /><br/><br/>
-      <b>🟠 WARNING</b><br/>
-      <sub>가벼운 알레르기로 등록한 성분<br/>복용에 주의하세요</sub>
-    </td>
-    <td align="center" width="240">
-      <img src="pillitscaneatYSM/app/src/main/res/drawable/pillit_safety.png" alt="SAFETY" width="96" /><br/><br/>
-      <b>🟢 SAFETY</b><br/>
-      <sub>등록한 알레르기에 없는 성분<br/>안전해요</sub>
-    </td>
+    <td align="center" width="33%"><img src="docs/images/result_danger.png" alt="DANGER 결과 화면" width="240" /></td>
+    <td align="center" width="33%"><img src="docs/images/result_warning.png" alt="WARNING 결과 화면" width="240" /></td>
+    <td align="center" width="33%"><img src="docs/images/result_safety.png" alt="SAFETY 결과 화면" width="240" /></td>
+  </tr>
+  <tr>
+    <td align="center"><b>🔴 DANGER</b><br/><sub>심한 알레르기로 등록한 성분<br/>복용하지 마세요</sub></td>
+    <td align="center"><b>🟠 WARNING</b><br/><sub>가벼운 알레르기로 등록한 성분<br/>복용에 주의하세요</sub></td>
+    <td align="center"><b>🟢 SAFETY</b><br/><sub>등록한 알레르기에 없는 성분<br/>안전해요</sub></td>
   </tr>
 </table>
 
-</div>
-
-<br/>
-
-<div align="center">
-
-<img src="result_screens.png" alt="DANGER, WARNING, SAFETY 결과 화면" width="820" />
-
-<sub>등록한 알레르기 정도에 따라 같은 약도 다른 결과로 표시됩니다. (앱 레이아웃을 바탕으로 재구성한 예시 화면)</sub>
+<sub>앱 레이아웃을 바탕으로 재구성한 예시 화면이며, 성분명과 부작용 문구는 예시입니다.</sub>
 
 </div>
+
+각 화면에는 위험도와 함께 주성분, 부작용이 표시되고, **더보기**를 누르면 효능과 주의사항을 확대해서 볼 수 있습니다.
 
 <br/>
 
