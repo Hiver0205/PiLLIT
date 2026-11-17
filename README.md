@@ -26,6 +26,7 @@
 <br/>
 
 [소개](#-프로젝트-소개) ·
+[결과 화면](#-결과-화면) ·
 [주요 기능](#-주요-기능) ·
 [동작 방식](#-동작-방식) ·
 [기술 스택](#-기술-스택) ·
@@ -65,6 +66,18 @@
     </td>
   </tr>
 </table>
+
+</div>
+
+<br/>
+
+## 📱 결과 화면
+
+<div align="center">
+
+<img src="result_screens.png" alt="DANGER, WARNING, SAFETY 결과 화면" width="820" />
+
+<sub>등록한 알레르기 정도에 따라 같은 약도 다른 결과로 표시됩니다. (앱 레이아웃을 바탕으로 재구성한 예시 화면)</sub>
 
 </div>
 
@@ -235,6 +248,7 @@ git clone https://github.com/Hiver0205/PiLLIT.git
 PiLLIT/
 ├── README.md
 ├── logo.png                         # README용 로고
+├── result_screens.png               # README용 결과 화면 이미지
 ├── Add OCR evaluation pipeline      # OCR 평가 스크립트 (Python)
 └── pillitscaneatYSM/                # 안드로이드 프로젝트
     └── app/src/main/
